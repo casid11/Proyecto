@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author casid
  */
+/*Conecta el objeto  con la base de datos*/
 public class Conectar {
        private String driver="com.mysql.jdbc.Driver";
        String connect="jdbc:mysql://127.0.0.1/empresa";
@@ -33,30 +34,30 @@ public class Conectar {
            }
        }
        public void Insert(String name, String password) throws ClassNotFoundException, SQLException{
-           try{
            Statement stmt;
            stmt = (Statement) con.createStatement();
            String query1 = "INSERT INTO users (Name, Pass) VALUES ('"+name+"','"+password+"')";
            stmt.executeUpdate(query1);
-           
-           }catch(HeadlessException | SQLException e){
-           
-           }
        }
        
-       public boolean checkname(String name) throws SQLException{
-            Statement stmt;
-            String query = "Select Name from users";
+       /*Busca el nombre de usuario en la BD*/
+       public boolean checkname(String name) throws SQLException {
+           boolean existe = false;
+               Statement stmt;
+               String query = "SELECT * FROM `users` WHERE `Name`='"+name+"'";
+               stmt = (Statement) con.createStatement();
+               ResultSet result = stmt.executeQuery(query);
+               if(result.next()){
+                   existe = true;
+               }    
+           return existe;
+        }
+       
+       public boolean checkpass(String name, String pass) throws SQLException {
+           Statement stmt;
+            String query = "Select Name from users where Name = "+name+"'";
             stmt = (Statement) con.createStatement();
             ResultSet result = stmt.executeQuery(query);
             boolean existe = false;
-
-            while (result.next() && existe == false) {
-                String nombre = result.getString("Name");
-                if (nombre.equals(name)) {
-                    existe = true;
-                }
-            }
-            return existe;
-        }
+       }
 }

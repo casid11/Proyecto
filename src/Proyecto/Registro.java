@@ -5,8 +5,6 @@
 package Proyecto;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -16,11 +14,23 @@ import javax.swing.JOptionPane;
  */
 public class Registro extends javax.swing.JFrame {
 
+    Conectar con;
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField name;
+    private javax.swing.JPasswordField pass1;
+    private javax.swing.JPasswordField pass2;
+    // End of variables declaration//GEN-END:variables
     /**
      * Creates new form pito
      */
     public Registro() {
         initComponents();
+        con = new Conectar();
     }
 
     /**
@@ -121,12 +131,12 @@ public class Registro extends javax.swing.JFrame {
     private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String[] passwords = new String[]{pass1.getText(), pass2.getText()};
+    private ArrayList<String> transformpassword(String[] passwords) {
+        String[] passwd = passwords;
         ArrayList<String> passwordsmd5 = new ArrayList<>();
-        for (String password : passwords) {
+        for (String password : passwd) {
 
+            /*Transforma las contraseñas en md5*/
             try {
                 java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
                 byte[] array = md.digest(password.getBytes());
@@ -135,23 +145,25 @@ public class Registro extends javax.swing.JFrame {
                 for (int i = 0; i < array.length; ++i) {
                     sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
                 }
-                
+
                 passwordsmd5.add(sb.toString());
             } catch (java.security.NoSuchAlgorithmException e) {
             }
-            
+
         }
-        
-        Conectar con = new Conectar();
-        
+        return passwordsmd5;
+    }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        String[] passwords = new String[]{pass1.getText(), pass2.getText()};
+        ArrayList<String> passwordsmd5 = transformpassword(passwords);
+
         try {
             if (con.checkname(name.getText()) == false) {
                 if (passwordsmd5.get(1).equals(passwordsmd5.get(0))) {
-                    try {
-                        con.Insert(name.getText(), passwordsmd5.get(1));
-                    } catch (ClassNotFoundException | SQLException ex) {
-                        Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    /*Inserta el usuario en la base de datos*/
+                    con.Insert(name.getText(), passwordsmd5.get(1));
+
                     JOptionPane.showMessageDialog(null, "Se registro correctamente");
                 } else {
                     JOptionPane.showMessageDialog(null, "La contraseña no coincide");
@@ -159,54 +171,16 @@ public class Registro extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Ya existe el usuario");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, "Se ha producido un error al interactuar con la base de datos");
+        } catch (ClassNotFoundException cnfe) {
+            JOptionPane.showMessageDialog(null, "Se ha producido un error. No se encuentra la clase especificada");
         }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Registro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Registro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Registro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Registro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new Registro().setVisible(true);
-        });
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField name;
-    private javax.swing.JPasswordField pass1;
-    private javax.swing.JPasswordField pass2;
-    // End of variables declaration//GEN-END:variables
-
 }
