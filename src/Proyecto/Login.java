@@ -15,6 +15,15 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField name;
+    private javax.swing.JPasswordField pass;
+    // End of variables declaration//GEN-END:variables
+
     /**
      * Creates new form Menu
      */
@@ -98,79 +107,53 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Registro n=new Registro();
+        Registro n = new Registro();
         n.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+    private String transformpassword(String passwords) {
+        String passwd = passwords;
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       String named = name.getText();
-       String password = pass.getText();
-       
-        Conectar con = new Conectar();
-       
+        /*Transforma las contraseñas en md5*/
         try {
-            if(con.checkname(named) == false){
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+            byte[] array = md.digest(passwd.getBytes());
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < array.length; ++i) {
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
+            }
+            passwd = sb.toString();
+        } catch (java.security.NoSuchAlgorithmException e) {
+        }
+
+        return passwd;
+    }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String named = name.getText();
+        String password = pass.getText();
+        password = transformpassword(password);
+        Conectar con = new Conectar();
+
+        try {
+            if (con.checkname(named) == false) {
                 JOptionPane.showMessageDialog(null, "No existe el usuario");
+            } else if (con.checkpass(named, password) == false) {
+                JOptionPane.showMessageDialog(null, "Contraseña erronea");
             } else {
-            
+                JOptionPane.showMessageDialog(null, "Login Correcto");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Se ha producido un error al interactuar con la base de datos");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField name;
-    private javax.swing.JPasswordField pass;
-    // End of variables declaration//GEN-END:variables
 }

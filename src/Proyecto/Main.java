@@ -15,8 +15,8 @@ public class Main {
      */
     public static void main(String[] args) {
         /*Conectar con=new Conectar()*/
-        Login m=new Login();
+        Login m = new Login();
         m.setVisible(true);
     }
-    
+
 }
