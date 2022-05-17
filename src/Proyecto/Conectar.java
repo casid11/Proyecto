@@ -23,9 +23,11 @@ public class Conectar {
     String connect = "jdbc:mysql://127.0.0.1/empresa";
     private String user = "root";
     private String contra = "";
+    private String current_user = "";
     public Connection con;
 
-    public Conectar() {
+    public Conectar(String usuario) {
+        this.current_user = usuario;
         try {
             Class.forName(driver);
             con = DriverManager.getConnection(connect, user, contra);
@@ -34,7 +36,11 @@ public class Conectar {
             JOptionPane.showMessageDialog(null, "No se pudo conectar con la base de datos");
         }
     }
-
+    
+    public String getuser(){
+        return current_user;
+    }
+    
     public void Insert(String name, String password) throws ClassNotFoundException, SQLException {
         Statement stmt;
         stmt = (Statement) con.createStatement();
