@@ -14,11 +14,33 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
     Conectar con;
+
+        // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JPanel Login;
+        private javax.swing.JPanel Register;
+        private javax.swing.JPanel background;
+        private javax.swing.JButton jButton1;
+        private javax.swing.JButton jButton2;
+        private javax.swing.JButton jButton3;
+        private javax.swing.JButton jButton4;
+        private javax.swing.JLabel jLabel1;
+        private javax.swing.JLabel jLabel2;
+        private javax.swing.JLabel jLabel3;
+        private javax.swing.JLabel jLabel4;
+        private javax.swing.JLabel jLabel5;
+        private javax.swing.JTextField name;
+        private javax.swing.JTextField name1;
+        private javax.swing.JPasswordField pass;
+        private javax.swing.JPasswordField pass1;
+        private javax.swing.JPasswordField pass2;
+        // End of variables declaration//GEN-END:variables
+
     /**
      * Creates new form Menu
      */
     public Login() {
         initComponents();
+        con = new Conectar();
     }
 
     /**
@@ -128,17 +150,6 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setText("Repite Contraseña");
 
         name.setText("Nombre");
-        name.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameActionPerformed(evt);
-            }
-        });
-
-        pass1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pass1ActionPerformed(evt);
-            }
-        });
 
         jButton2.setText("Login");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -216,7 +227,6 @@ public class Login extends javax.swing.JFrame {
     //Comprobar contraseñas login
     private String transformpasswordlog(String passwords) {
         String passwd = passwords;
-
         /*Transforma las contraseñas en md5*/
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
@@ -257,10 +267,9 @@ public class Login extends javax.swing.JFrame {
     }
      //Login de usuarios
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String named = name.getText();
+        String named = name1.getText();
         String password = pass.getText();
         password = transformpasswordlog(password);
-        con = new Conectar(named);
         try {
             if (con.checkname(named) == false) {
                 JOptionPane.showMessageDialog(null, "No existe el usuario");
@@ -287,7 +296,7 @@ public class Login extends javax.swing.JFrame {
 
         String[] passwords = new String[]{pass1.getText(), pass2.getText()};
         ArrayList<String> passwordsmd5 = transformpassword(passwords);
-        con = new Conectar(name.getText());
+        con.updateuser(name.getText());
         if ( passwords[0].isEmpty() || passwords[1].isEmpty()) {
             JOptionPane.showMessageDialog(null, "La contraseña no puede estar vacia");
         } else {
@@ -316,36 +325,10 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameActionPerformed
-
-    private void pass1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pass1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pass1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Register.setVisible(false);
         Login.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Login;
-    private javax.swing.JPanel Register;
-    private javax.swing.JPanel background;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField name;
-    private javax.swing.JTextField name1;
-    private javax.swing.JPasswordField pass;
-    private javax.swing.JPasswordField pass1;
-    private javax.swing.JPasswordField pass2;
-    // End of variables declaration//GEN-END:variables
+
 }

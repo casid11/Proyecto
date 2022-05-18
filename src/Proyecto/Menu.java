@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Proyecto;
-
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author casid
@@ -21,9 +21,9 @@ public class Menu extends javax.swing.JFrame {
         this.con=con;
         if( this.con.getuser().equals("admin") ){
             keypad.setVisible(false);
-            keypad2.setVisible(true);
+            adminkeypad.setVisible(true);
         } else {
-            keypad2.setVisible(false);
+            adminkeypad.setVisible(false);
             keypad.setVisible(true);
         }
     }
@@ -39,8 +39,13 @@ public class Menu extends javax.swing.JFrame {
         background = new javax.swing.JPanel();
         keypad = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        keypad2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        adminkeypad = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableusers = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,38 +65,92 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(keypadLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
-                .addContainerGap(865, Short.MAX_VALUE))
+                .addContainerGap(906, Short.MAX_VALUE))
         );
         keypadLayout.setVerticalGroup(
             keypadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(keypadLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jButton1)
-                .addContainerGap(493, Short.MAX_VALUE))
+                .addContainerGap(497, Short.MAX_VALUE))
         );
 
         background.add(keypad, "card2");
 
-        jButton2.setText("jButton2");
+        adminkeypad.setLayout(new java.awt.CardLayout());
 
-        javax.swing.GroupLayout keypad2Layout = new javax.swing.GroupLayout(keypad2);
-        keypad2.setLayout(keypad2Layout);
-        keypad2Layout.setHorizontalGroup(
-            keypad2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, keypad2Layout.createSequentialGroup()
-                .addContainerGap(786, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(91, 91, 91))
+        jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        tableusers.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tableusers);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(127, 127, 127))
         );
-        keypad2Layout.setVerticalGroup(
-            keypad2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, keypad2Layout.createSequentialGroup()
-                .addContainerGap(423, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(68, 68, 68))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(85, 85, 85))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
-        background.add(keypad2, "card3");
+        adminkeypad.add(jPanel1, "card2");
+
+        jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(860, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(52, 52, 52))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(467, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(45, 45, 45))
+        );
+
+        adminkeypad.add(jPanel2, "card3");
+
+        background.add(adminkeypad, "card3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,11 +177,26 @@ public class Menu extends javax.swing.JFrame {
         System.out.print(con.getuser());
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jPanel1.setVisible(false);
+        jPanel2.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        jPanel2.setVisible(false);
+        jPanel1.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel adminkeypad;
     private javax.swing.JPanel background;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel keypad;
-    private javax.swing.JPanel keypad2;
+    private javax.swing.JTable tableusers;
     // End of variables declaration//GEN-END:variables
 }

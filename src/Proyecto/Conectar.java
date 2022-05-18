@@ -26,8 +26,7 @@ public class Conectar {
     private String current_user = "";
     public Connection con;
 
-    public Conectar(String usuario) {
-        this.current_user = usuario;
+    public Conectar() {
         try {
             Class.forName(driver);
             con = DriverManager.getConnection(connect, user, contra);
@@ -35,6 +34,10 @@ public class Conectar {
         } catch (HeadlessException | ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo conectar con la base de datos");
         }
+    }
+    
+    public void updateuser(String usuario){
+         this.current_user = usuario;
     }
     
     public String getuser(){
