@@ -270,6 +270,7 @@ public class Login extends javax.swing.JFrame {
         String named = name1.getText();
         String password = pass.getText();
         password = transformpasswordlog(password);
+        con.updateuser(name1.getText());
         try {
             if (con.checkname(named) == false) {
                 JOptionPane.showMessageDialog(null, "No existe el usuario");

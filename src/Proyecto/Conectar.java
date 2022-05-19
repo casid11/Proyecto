@@ -77,4 +77,12 @@ public class Conectar {
         }
         return iguales;
     }
+    
+    public ResultSet showtable(String table) throws SQLException{
+        Statement stmt;
+        String query = "Select * from "+table+" ";
+        stmt = (Statement) con.createStatement();
+        ResultSet result = stmt.executeQuery(query);
+        return result;
+    }
 }

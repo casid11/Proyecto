@@ -3,7 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Proyecto;
-import net.proteanit.sql.DbUtils;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author casid
@@ -40,10 +46,12 @@ public class Menu extends javax.swing.JFrame {
         keypad = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         adminkeypad = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        SearchPerson = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableusers = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        opcion = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
 
@@ -79,50 +87,81 @@ public class Menu extends javax.swing.JFrame {
 
         adminkeypad.setLayout(new java.awt.CardLayout());
 
-        jButton3.setText("jButton3");
+        jButton3.setText("Go Back");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        tableusers.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "DNI", "Apellidos", "Nombre", "Tipo"
             }
-        ));
-        jScrollPane1.setViewportView(tableusers);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane2.setViewportView(jTable1);
+
+        opcion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Buscar Cliente", "Buscar Empleado", "Buscar Ambos" }));
+        opcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opcionActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Search");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout SearchPersonLayout = new javax.swing.GroupLayout(SearchPerson);
+        SearchPerson.setLayout(SearchPersonLayout);
+        SearchPersonLayout.setHorizontalGroup(
+            SearchPersonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SearchPersonLayout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
+                .addComponent(opcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(96, 96, 96))
+            .addGroup(SearchPersonLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addComponent(jButton3)
-                .addGap(127, 127, 127))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(41, 41, 41))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(85, 85, 85))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+        SearchPersonLayout.setVerticalGroup(
+            SearchPersonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SearchPersonLayout.createSequentialGroup()
+                .addGroup(SearchPersonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SearchPersonLayout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(SearchPersonLayout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(opcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(SearchPersonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton2))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        adminkeypad.add(jPanel1, "card2");
+        adminkeypad.add(SearchPerson, "card2");
 
         jButton4.setText("jButton4");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -178,25 +217,111 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jPanel1.setVisible(false);
+        SearchPerson.setVisible(false);
         jPanel2.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         jPanel2.setVisible(false);
-        jPanel1.setVisible(true);
+        SearchPerson.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void opcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opcionActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt){//GEN-FIRST:event_jButton2ActionPerformed
+       String opc = (String) opcion.getSelectedItem();
+       DefaultTableModel dm = (DefaultTableModel)jTable1.getModel();
+        dm.getDataVector().removeAllElements();
+        revalidate();
+       switch(opc){
+           case "Buscar Cliente":
+           {
+               try {
+                   ResultSet result = con.showtable("cliente");
+                   while(result.next()){
+                       String id = result.getString("DNIcliente");
+                       String name = result.getString("Nombrecliente");
+                       String surname = result.getString("ApellidosClientes");
+                       String tipo = "Cliente";
+                       String tbData[] = {id,name,surname,tipo};
+                       DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
+                       tb1Model.addRow(tbData);
+                   }
+               } catch (SQLException ex) {
+                   Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           }
+               break;
+
+
+           case "Buscar Empleado":
+           {
+               try {
+                   ResultSet result = con.showtable("empleado");
+                   while(result.next()){
+                       String id = result.getString("DNIempleado");
+                       String name = result.getString("Nombreempleado");
+                       String surname = result.getString("ApellidosEmpleado");
+                       String tipo = "Empleado";
+                       String tbData[] = {id,name,surname,tipo};
+                       DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
+                       tb1Model.addRow(tbData);
+                   }
+               } catch (SQLException ex) {
+                   Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           }
+               break;
+
+           case "Buscar Ambos":
+           {
+               try {
+                   ResultSet result = con.showtable("cliente");
+                   while(result.next()){
+                       String id = result.getString("DNIcliente");
+                       String name = result.getString("Nombrecliente");
+                       String surname = result.getString("ApellidosClientes");
+                       String tipo = "Cliente";
+                       String tbData[] = {id,name,surname,tipo};
+                       DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
+                       tb1Model.addRow(tbData);
+                   }
+                   
+                   ResultSet resu = con.showtable("empleado");
+                   while(resu.next()){
+                       String id = resu.getString("DNIempleado");
+                       String name = resu.getString("Nombreempleado");
+                       String surname = resu.getString("ApellidosEmpleado");
+                       String tipo = "Empleado";
+                       String tbData[] = {id,name,surname,tipo};
+                       DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
+                       tb1Model.addRow(tbData);
+                   }
+               } catch (SQLException ex) {
+                   Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           }
+               break;
+
+           default:
+               
+       }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel SearchPerson;
     private javax.swing.JPanel adminkeypad;
     private javax.swing.JPanel background;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel keypad;
-    private javax.swing.JTable tableusers;
+    private javax.swing.JComboBox<String> opcion;
     // End of variables declaration//GEN-END:variables
 }
