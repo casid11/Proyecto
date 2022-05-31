@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Proyecto;
+package modelo;
 
 import java.awt.HeadlessException;
 import java.sql.Connection;
@@ -17,19 +17,22 @@ import javax.swing.JOptionPane;
  * @author casid
  */
 /*Conecta el objeto  con la base de datos*/
-public class Conectar {
+public class Conexion  {
 
-    private String driver = "com.mysql.jdbc.Driver";
-    String connect = "jdbc:mysql://127.0.0.1/empresa";
-    private String user = "root";
-    private String contra = "";
+    private final String DRIVER = "com.mysql.jdbc.Driver";
+    private final String CONNECT = "jdbc:mysql://127.0.0.1/empresa";
+    private final String USER = "root";
+    private final String CONTRA = "";
     private String current_user = "";
     public Connection con;
-
-    public Conectar() {
+    
+    public Conexion() {
+    }
+    
+    public void conectar(){
         try {
-            Class.forName(driver);
-            con = DriverManager.getConnection(connect, user, contra);
+            Class.forName(DRIVER);
+            con = DriverManager.getConnection(CONNECT, USER, CONTRA);
             JOptionPane.showMessageDialog(null, "Se pudo conectar con la base de datos");
         } catch (HeadlessException | ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo conectar con la base de datos");
@@ -40,11 +43,7 @@ public class Conectar {
          this.current_user = usuario;
     }
     
-    public String getuser(){
-        return current_user;
-    }
-    
-    public void Insert(String name, String password) throws ClassNotFoundException, SQLException {
+       public void Insert(String name, String password) throws ClassNotFoundException, SQLException {
         Statement stmt;
         stmt = (Statement) con.createStatement();
         String query1 = "INSERT INTO users (Name, Pass) VALUES ('" + name + "','" + password + "')";
@@ -55,7 +54,7 @@ public class Conectar {
     public boolean checkname(String name) throws SQLException {
         boolean existe = false;
         Statement stmt;
-        String query = "SELECT * FROM `users` WHERE `Name`='" + name + "'";
+        String query = "Select * from users where Name = '" + name + "'";
         stmt = (Statement) con.createStatement();
         ResultSet result = stmt.executeQuery(query);
         if (result.next()) {
@@ -85,4 +84,9 @@ public class Conectar {
         ResultSet result = stmt.executeQuery(query);
         return result;
     }
+
+    public String getuser(){
+        return current_user;
+    }
+    
 }

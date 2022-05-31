@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Proyecto/Proyecto/src/Proyecto/Login.java</file>
-            <file>file:/D:/Proyecto/Proyecto/src/Proyecto/Menu.java</file>
-            <file>file:/D:/Proyecto/Proyecto/src/Proyecto/Conectar.java</file>
+            <file>file:/D:/Proyecto/Proyecto2/src/modelo/ProcesosLogin.java</file>
+            <file>file:/D:/Proyecto/Proyecto2/src/vista/MainMenu.fxml</file>
+            <file>file:/D:/Proyecto/Proyecto2/src/modelo/Conexion.java</file>
+            <file>file:/D:/Proyecto/Proyecto2/src/controlador/VistaPrincipalController.java</file>
+            <file>file:/D:/Proyecto/Proyecto2/src/controlador/MainMenuController.java</file>
+            <file>file:/D:/Proyecto/Proyecto2/src/vista/VistaPrincipal.fxml</file>
         </group>
     </open-files>
 </project-private>
