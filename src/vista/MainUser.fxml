@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="747.0" prefWidth="1097.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.MainUserController">
+   <children>
+      <TabPane layoutX="-1.0" layoutY="2.0" prefHeight="747.0" prefWidth="1097.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Pedidos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="719.0" prefWidth="1089.0">
+                     <children>
+                        <SplitPane dividerPositions="0.7853881278538812" layoutX="1.0" layoutY="-1.0" prefHeight="720.0" prefWidth="1097.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="518.0" prefWidth="290.0">
+                                 <children>
+                                    <TableView fx:id="tablapedidos" onMouseClicked="#selectedpedido" prefHeight="718.0" prefWidth="858.0">
+                                      <columns>
+                                        <TableColumn fx:id="idPedido" prefWidth="121.0" text="Numero de pedidos" />
+                                        <TableColumn fx:id="idCliente" prefWidth="183.0" text="Cliente" />
+                                          <TableColumn fx:id="IdFechaR" prefWidth="135.0" text="Fecha realizado" />
+                                          <TableColumn fx:id="ifFechaE" prefWidth="143.0" text="Fecha entrega" />
+                                          <TableColumn fx:id="idDistribuidora" prefWidth="275.0" text="Distribuidora" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Button fx:id="AdminMenuBT1" layoutX="133.0" layoutY="14.0" mnemonicParsing="false" onAction="#AdminMenu" text="Admin Menu" />
+                                    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Logout" text="Logout" />
+                                    <TableView fx:id="tablapedido" layoutY="248.0" prefHeight="475.0" prefWidth="234.0">
+                                      <columns>
+                                        <TableColumn fx:id="idHeramienta" prefWidth="153.0" text="Herramienta" />
+                                        <TableColumn fx:id="idCantidad" prefWidth="79.0" text="Cantidad" />
+                                      </columns>
+                                    </TableView>
+                                    <Label layoutX="14.0" layoutY="62.0" text="Buscar pedido" />
+                                    <TextField fx:id="buscarpedidoTF" layoutX="16.0" layoutY="92.0" prefHeight="25.0" prefWidth="195.0" />
+                                    <Button layoutX="160.0" layoutY="194.0" mnemonicParsing="false" onAction="#buscarpedido" text="Buscar" />
+                                    <ComboBox fx:id="buscarpedidoCB" layoutX="16.0" layoutY="126.0" prefHeight="25.0" prefWidth="195.0" />
+                                    <DatePicker fx:id="datepicker" layoutX="16.0" layoutY="160.0" prefHeight="25.0" prefWidth="194.0" />
+                                    <Button layoutX="15.0" layoutY="194.0" mnemonicParsing="false" onAction="#pedidoentregado" text="Pedido entregado" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Almacenes">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.797608095676173" layoutX="8.0" prefHeight="720.0" prefWidth="1089.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="tablaalmacenes" onMouseClicked="#selectedalmacen" prefHeight="718.0" prefWidth="864.0">
+                                      <columns>
+                                        <TableColumn fx:id="idAlmacen" prefWidth="422.0" text="Nombre Almacen" />
+                                        <TableColumn fx:id="idOficina" prefWidth="440.0" text="Oficina encargada" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Button fx:id="AdminMenuBT2" layoutX="118.0" layoutY="14.0" mnemonicParsing="false" onAction="#AdminMenu" text="Admin Menu" />
+                                    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Logout" text="Logout" />
+                                    <ComboBox fx:id="buscaralmacenCB" layoutX="16.0" layoutY="138.0" prefHeight="25.0" prefWidth="182.0" />
+                                    <Label layoutX="16.0" layoutY="69.0" text="Buscar Almacen" />
+                                    <TextField fx:id="buscaralmacenTF" layoutX="14.0" layoutY="104.0" prefHeight="25.0" prefWidth="185.0" />
+                                    <Button layoutX="148.0" layoutY="173.0" mnemonicParsing="false" onAction="#buscaralmacen" text="Buscar" />
+                                    <TableView fx:id="tablaalmacen" layoutY="414.0" onMouseClicked="#selectedherramienta" prefHeight="304.0" prefWidth="218.0">
+                                      <columns>
+                                        <TableColumn fx:id="idHerramientas" prefWidth="118.0" text="Herramientas" />
+                                          <TableColumn fx:id="idCantidades" prefWidth="98.0" text="Cantidad" />
+                                      </columns>
+                                    </TableView>
+                                    <Label layoutX="16.0" layoutY="251.0" text="Cantidad" />
+                                    <TextField fx:id="CantidadTF" layoutX="14.0" layoutY="280.0" prefHeight="25.0" prefWidth="180.0" />
+                                    <Button layoutX="127.0" layoutY="353.0" mnemonicParsing="false" onAction="#modificarcantidad" text="Modificar" />
+                                    <Label layoutX="14.0" layoutY="324.0" text="Añadir" />
+                                    <ComboBox fx:id="AñadirCB" layoutX="57.0" layoutY="320.0" prefHeight="25.0" prefWidth="136.0" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Herramientas">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.7963470319634703" prefHeight="721.0" prefWidth="1097.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="tablaherramientas" layoutX="6.0" onMouseClicked="#selectedherramientaalmacen" prefHeight="718.0" prefWidth="866.0">
+                                      <columns>
+                                        <TableColumn fx:id="idHerramientaalmacenes" prefWidth="402.0" text="Herramientas" />
+                                        <TableColumn fx:id="idCantidadHs" prefWidth="463.0" text="Cantidad" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Logout" text="Logout" />
+                                    <Button fx:id="AdminMenuBT" layoutX="120.0" layoutY="14.0" mnemonicParsing="false" onAction="#AdminMenu" text="Admin Menu" />
+                                    <Label layoutX="18.0" layoutY="76.0" text="Buscar Herramienta" />
+                                    <TextField fx:id="buscarherramientaTF" layoutX="18.0" layoutY="102.0" prefHeight="25.0" prefWidth="184.0" />
+                                    <Button layoutX="150.0" layoutY="138.0" mnemonicParsing="false" onAction="#buscarherramienta" text="Buscar" />
+                                    <TableView fx:id="tablaherramienta" layoutY="238.0" prefHeight="482.0" prefWidth="221.0">
+                                      <columns>
+                                        <TableColumn fx:id="idAlmacenes" prefWidth="108.0" text="Almacen" />
+                                        <TableColumn fx:id="idCantidadH" prefWidth="112.0" text="Cantidad" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

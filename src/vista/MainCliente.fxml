@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="559.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.MainClienteController">
+   <children>
+      <Button layoutX="518.0" layoutY="501.0" mnemonicParsing="false" onAction="#RealizarPedido" text="Realizar Pedido" />
+      <TableView fx:id="tablacesta" layoutX="235.0" layoutY="203.0" onMouseClicked="#selectedcesta" prefHeight="310.0" prefWidth="180.0">
+        <columns>
+          <TableColumn editable="false" prefWidth="179.0" resizable="false" sortable="false" text="Mi Cesta">
+               <columns>
+                  <TableColumn fx:id="idNombre" editable="false" prefWidth="107.0" resizable="false" sortable="false" text="Nombre" />
+                  <TableColumn fx:id="idCantidad" editable="false" prefWidth="72.0" resizable="false" sortable="false" text="Cantidad" />
+               </columns>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <Accordion layoutX="37.0" layoutY="97.0" />
+      <TableView fx:id="tablastock" layoutX="24.0" layoutY="51.0" onMouseClicked="#selectedstock" prefHeight="459.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="idStock" editable="false" prefWidth="199.0" resizable="false" sortable="false" text="Stock" />
+            <TableColumn fx:id="idcantidadstock" minWidth="0.0" prefWidth="0.0" text="Cantidad" />
+        </columns>
+      </TableView>
+      <Label layoutX="233.0" layoutY="114.0" text="Seleccionado:" />
+      <Label fx:id="selecionadoLB" layoutX="317.0" layoutY="116.0" prefHeight="17.0" prefWidth="87.0" />
+      <Button layoutX="350.0" layoutY="155.0" mnemonicParsing="false" onAction="#Añadir" text="Añadir" />
+      <Button layoutX="317.0" layoutY="155.0" mnemonicParsing="false" onAction="#sumar" text="+" />
+      <Button layoutX="284.0" layoutY="155.0" mnemonicParsing="false" onAction="#resta" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Label fx:id="cantidadseleccionadaLB" layoutX="242.0" layoutY="159.0" prefHeight="17.0" prefWidth="25.0" />
+      <Label layoutX="433.0" layoutY="242.0" text="Seleccionado:" />
+      <Label fx:id="selecionadocestaLB" layoutX="517.0" layoutY="244.0" prefHeight="17.0" prefWidth="87.0" />
+      <Button layoutX="550.0" layoutY="283.0" mnemonicParsing="false" onAction="#Modificar" text="Modificar" />
+      <Button layoutX="517.0" layoutY="283.0" mnemonicParsing="false" onAction="#sumarcesta" text="+" />
+      <Button layoutX="484.0" layoutY="283.0" mnemonicParsing="false" onAction="#restacesta" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Label fx:id="cantidadseleccionadacestaLB" layoutX="442.0" layoutY="287.0" prefHeight="17.0" prefWidth="25.0" />
+      <Label layoutX="24.0" layoutY="23.0" text="Usuario:" />
+      <Label fx:id="usuarioLB" layoutX="85.0" layoutY="23.0" prefHeight="17.0" prefWidth="258.0" />
+      <Button layoutX="567.0" layoutY="28.0" mnemonicParsing="false" onAction="#Logout" text="Logout" />
+   </children>
+</AnchorPane>
