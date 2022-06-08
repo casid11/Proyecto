@@ -1,0 +1,7 @@
+2022-06-07 16:18:18 0 [ERROR] InnoDB: The innodb_system data file 'ibdata1' must be writable
+2022-06-07 16:18:18 0 [ERROR] InnoDB: The innodb_system data file 'ibdata1' must be writable
+2022-06-07 16:18:18 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2022-06-07 16:18:18 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2022-06-07 16:18:18 0 [Note] Plugin 'FEEDBACK' is disabled.
+2022-06-07 16:18:18 0 [ERROR] Unknown/unsupported storage engine: InnoDB
+2022-06-07 16:18:18 0 [ERROR] Aborting

@@ -17,8 +17,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import modelo.ProcesosLogin;
+import modelo.Procesos;
 import vista.Alerta;
 
 /**
@@ -27,7 +29,7 @@ import vista.Alerta;
  * @author casid
  */
 public class VistaPrincipalController implements Initializable {
-    private ProcesosLogin procesos;
+    private Procesos procesos;
     
   
      @FXML
@@ -60,10 +62,32 @@ public class VistaPrincipalController implements Initializable {
     @FXML
     private Button registerBT1;
     
+    @FXML
+    private CheckBox empleadocheck;
+    
+    @FXML
+    private TextField DNITF;
+    
+    @FXML
+    private Label DNILB;
+    
+    @FXML
+    private Label apellidosLB;
+
+    @FXML
+    private TextField apellidosTF;
+    
+    @FXML
+    private Label nameLB;
+
+    @FXML
+    private TextField nameTF;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        procesos = ProcesosLogin.getProcesosInstancia();
+        procesos = Procesos.getProcesosInstancia();
+        
+        
     }
     
     @FXML
@@ -71,24 +95,47 @@ public class VistaPrincipalController implements Initializable {
         LoginBT.setVisible(true);
         movetoregisterBT.setVisible(true);
         registerBT1.setVisible(false);
+        empleadocheck.setVisible(false);
         backtologinBT.setVisible(false);
         confirmpasswordTF.setVisible(false);
         cofirmpasswordLB.setVisible(false);
+        DNITF.setVisible(false);
+        DNILB.setVisible(false);
+        apellidosLB.setVisible(false);
+        apellidosTF.setVisible(false);
+        nameLB.setVisible(false);
+        nameTF.setVisible(false);
     }
-
+    
     @FXML
     void login(ActionEvent event) {
         try {
-            
             if (procesos.login(nombreTF.getText(), passwordTF.getText())) {
-                Parent root = FXMLLoader.load(getClass().getResource("/vista/MainMenu.fxml"));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+                if (nombreTF.getText().equals("admin")) {
+                    Parent root = FXMLLoader.load(getClass().getResource("/vista/MainMenu.fxml"));
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } else {
+                    if(procesos.checkempleado(nombreTF.getText())){
+                        Parent root = FXMLLoader.load(getClass().getResource("/vista/MainUser.fxml"));
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                    }else{
+                        Parent root = FXMLLoader.load(getClass().getResource("/vista/MainCliente.fxml"));
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                    }                    
+                }
             }
         } catch (IOException e) {
-            Alerta.mostrarAlertError("Error al cambiar menu");
+            //Alerta.mostrarAlertError("Error al cambiar menu");
+            e.printStackTrace();
         }
     }
 
@@ -97,25 +144,62 @@ public class VistaPrincipalController implements Initializable {
         LoginBT.setVisible(false);
         movetoregisterBT.setVisible(false);
         registerBT1.setVisible(true);
+        empleadocheck.setVisible(true);
+        DNITF.setVisible(true);
+        DNILB.setVisible(true);
         backtologinBT.setVisible(true);
         confirmpasswordTF.setVisible(true);
         cofirmpasswordLB.setVisible(true);
+        apellidosLB.setVisible(true);
+        apellidosTF.setVisible(true);
+        nameLB.setVisible(true);
+        nameTF.setVisible(true);
+        empleadocheck.setSelected(false);
     }
+    
     @FXML
     void register(ActionEvent event) {
-        try {  
-            
-            if (procesos.registro(nombreTF.getText(), passwordTF.getText(), confirmpasswordTF.getText())) {
-                
-                Parent root = FXMLLoader.load(getClass().getResource("/vista/MainMenu.fxml"));
+        try {
+            if(empleadocheck.selectedProperty().getValue()){
+                if(procesos.registro(nombreTF.getText(), passwordTF.getText(), confirmpasswordTF.getText(), "empleado" , nameTF.getText(), apellidosTF.getText(), DNITF.getText())) {
+
+                    Parent root = FXMLLoader.load(getClass().getResource("/vista/MainUser.fxml"));
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();                    
+                }
+            }else{
+                if(procesos.registro(nombreTF.getText(), passwordTF.getText(), confirmpasswordTF.getText(), "cliente", nameTF.getText(), apellidosTF.getText(), DNITF.getText())){
+                Parent root = FXMLLoader.load(getClass().getResource("/vista/MainCliente.fxml"));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.show();
-            
+                stage.show();    
+                }
             }
         } catch (IOException e) {
             Alerta.mostrarAlertError("Error al cambiar menu");
+        }
+    }
+    
+    
+    @FXML
+    void checkclick(MouseEvent event) {
+        if(DNITF.isVisible()){
+            DNITF.setVisible(false);
+            DNILB.setVisible(false);
+            apellidosLB.setVisible(false);
+            apellidosTF.setVisible(false);
+            nameLB.setVisible(false);
+            nameTF.setVisible(false);
+        }else{
+            DNITF.setVisible(true);
+            DNILB.setVisible(true);
+            apellidosLB.setVisible(true);
+            apellidosTF.setVisible(true);
+            nameLB.setVisible(true);
+            nameTF.setVisible(true);
         }
     }
 }

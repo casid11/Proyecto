@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Proyecto.jnlp">
+  <information>
+    <title>Proyecto</title>
+    <vendor>Federico Carmona Ceballos</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Proyecto.jar" size="43182" download="eager" />
+    <jar href="lib\jdbc2_0-stdext.jar" size="6727" download="eager" />
+    <jar href="lib\jta-spec1_0_1.jar" size="8674" download="eager" />
+    <jar href="lib\mysql-connector-java-3.0.17-ga-bin.jar" size="246317" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="controlador.Main"  name="Proyecto" />
+  <update check="always"/>
+</jnlp>

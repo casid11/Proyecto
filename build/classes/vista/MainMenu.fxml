@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="949.0" prefWidth="1826.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.MainMenuController">
+    <stylesheets>
+        <URL value="@Style.css" />
+    </stylesheets>
+   <children>
+      <TabPane prefHeight="923.0" prefWidth="1826.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Usuarios">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="634.0" prefWidth="719.0">
+                     <children>
+                        <SplitPane dividerPositions="0.8432017543859649" layoutX="-1.0" layoutY="-1.0" prefHeight="894.0" prefWidth="1826.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="586.0" prefWidth="746.0">
+                                 <children>
+                                    <TableView fx:id="tablausuarios" layoutX="6.0" layoutY="1.0" onMouseClicked="#selectedusuario" prefHeight="891.0" prefWidth="1536.0">
+                                      <columns>
+                                        <TableColumn fx:id="idUsuario" prefWidth="755.0" text="Nombre Usuario" />
+                                          <TableColumn fx:id="idTipo" prefWidth="774.0" text="Tipo" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="843.0" prefWidth="912.0">
+                                 <children>
+                                    <Label layoutX="16.0" layoutY="90.0" prefHeight="17.0" prefWidth="130.0" text="Usuario a buscar" />
+                                    <Button fx:id="buscarusuarioBT" layoutX="194.0" layoutY="151.0" mnemonicParsing="false" onAction="#buscarusuario" text="Buscar" />
+                                    <Label layoutX="16.0" layoutY="213.0" text="Usuario selecionado" />
+                                    <Button layoutX="16.0" layoutY="360.0" mnemonicParsing="false" onAction="#deleteusuarioBT" text="Delete" />
+                                    <Button layoutX="178.0" layoutY="360.0" mnemonicParsing="false" onAction="#modificarusuario" text="Modificar" />
+                                    <TextField fx:id="buscarusuarioTF" layoutX="14.0" layoutY="115.0" prefHeight="25.0" prefWidth="233.0" />
+                                    <TextField fx:id="usuarioselecionadoTF" layoutX="14.0" layoutY="244.0" prefHeight="25.0" prefWidth="233.0" />
+                                    <Button fx:id="MnUserBT" layoutX="167.0" layoutY="14.0" mnemonicParsing="false" onAction="#MnUser" text="Menu de usuario" />
+                                    <Button layoutX="16.0" layoutY="14.0" mnemonicParsing="false" onAction="#Logout" text="Logout" />
+                                    <Label layoutX="16.0" layoutY="280.0" text="Tipo de Usuario" />
+                                    <ComboBox fx:id="tipousuarioCB" layoutX="14.0" layoutY="309.0" prefHeight="25.0" prefWidth="230.0" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="empleadostab" text="Empleados">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="516.0" prefWidth="755.0">
+                     <children>
+                        <SplitPane dividerPositions="0.8279901356350184" prefHeight="898.0" prefWidth="1826.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="586.0" prefWidth="805.0">
+                                 <children>
+                                    <TableView fx:id="tablaempleado" onMouseClicked="#selected" prefHeight="896.0" prefWidth="1505.0">
+                                      <columns>
+                                        <TableColumn fx:id="idDNI" prefWidth="146.0" text="DNI" />
+                                        <TableColumn fx:id="idApellidos" minWidth="0.0" prefWidth="156.0" text="Apellidos" />
+                                          <TableColumn fx:id="idNombre" minWidth="6.0" prefWidth="135.0" text="Nombre" />
+                                          <TableColumn fx:id="idOficina" prefWidth="93.0" text="Oficina" />
+                                          <TableColumn fx:id="idTelefono" prefWidth="123.0" text="Telefono" />
+                                          <TableColumn fx:id="idCorreo" prefWidth="131.0" text="Correo" />
+                                          <TableColumn fx:id="idSueldo" prefWidth="135.0" text="Sueldo" />
+                                          <TableColumn fx:id="idFechaIngreso" prefWidth="162.0" text="FechaIngreso" />
+                                          <TableColumn fx:id="idDireccion" prefWidth="281.0" text="Direccion" />
+                                          <TableColumn fx:id="idEstado" prefWidth="142.0" text="Estado" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="860.0" prefWidth="382.0">
+                                 <children>
+                                    <Label fx:id="buscarempleadoLB" layoutX="17.0" layoutY="62.0" prefHeight="17.0" prefWidth="130.0" text="Empleado a buscar" />
+                                    <Button fx:id="buscarempleadoBT" layoutX="193.0" layoutY="165.0" mnemonicParsing="false" onAction="#buscarempleado" text="Buscar" />
+                                    <Label fx:id="nombreempleadoLB" layoutX="17.0" layoutY="253.0" text="Nombre empleado" />
+                                    <Button fx:id="deleteBT" layoutX="41.0" layoutY="857.0" mnemonicParsing="false" onAction="#borrarempleado" text="Delete" />
+                                    <Button fx:id="modificarBT" layoutX="122.0" layoutY="857.0" mnemonicParsing="false" onAction="#modificarempleado" text="Modificar" />
+                                    <Button fx:id="newempleadoBT" layoutX="220.0" layoutY="857.0" mnemonicParsing="false" onAction="#newempleado" text="Añadir" />
+                                    <TextField fx:id="buscarempleadoTF" layoutX="15.0" layoutY="87.0" prefHeight="25.0" prefWidth="233.0" />
+                                    <TextField fx:id="nombreempleadoTF" layoutX="15.0" layoutY="284.0" prefHeight="25.0" prefWidth="233.0" />
+                                    <Label fx:id="apellidosLB" layoutX="17.0" layoutY="325.0" text="Apellidos empleado" />
+                                    <TextField fx:id="apellidosTF" layoutX="15.0" layoutY="356.0" prefHeight="25.0" prefWidth="233.0" />
+                                    <Label fx:id="oficinaLB" layoutX="19.0" layoutY="395.0" text="Oficina empleado" />
+                                    <TextField fx:id="oficinaBT" layoutX="17.0" layoutY="426.0" prefHeight="25.0" prefWidth="233.0" />
+                                    <Label fx:id="tlfLB" layoutX="15.0" layoutY="458.0" prefHeight="17.0" prefWidth="107.0" text="Telefono empleado" />
+                                    <TextField fx:id="tlfTF" layoutX="17.0" layoutY="489.0" prefHeight="25.0" prefWidth="233.0" />
+                                    <Label fx:id="sueldoLB" layoutX="19.0" layoutY="594.0" text="Sueldo empleado" />
+                                    <TextField fx:id="sueldoTF" layoutX="19.0" layoutY="625.0" prefHeight="25.0" prefWidth="233.0" />
+                                    <Button fx:id="MnUserBT1" layoutX="193.0" layoutY="16.0" mnemonicParsing="false" onAction="#MnUser" text="Menu de usuario" />
+                                    <Label fx:id="direccionLB" layoutX="17.0" layoutY="662.0" text="Direccion empleado" />
+                                    <TextField fx:id="direccionTF" layoutX="18.0" layoutY="693.0" prefHeight="25.0" prefWidth="233.0" />
+                                    <ComboBox fx:id="opcbaja" layoutX="19.0" layoutY="743.0" prefHeight="25.0" prefWidth="234.0" />
+                                    <ComboBox fx:id="opcbusqueda" layoutX="17.0" layoutY="122.0" prefHeight="25.0" prefWidth="234.0" />
+                                    <Label fx:id="dniempleadoLB" layoutX="18.0" layoutY="188.0" text="DNI empleado" />
+                                    <TextField fx:id="dniempleadoTF" layoutX="16.0" layoutY="219.0" prefHeight="25.0" prefWidth="233.0" />
+                                    <Label fx:id="correoLB" layoutX="20.0" layoutY="531.0" prefHeight="17.0" prefWidth="107.0" text="Correo empleado" />
+                                    <TextField fx:id="correoTF" layoutX="19.0" layoutY="562.0" prefHeight="25.0" prefWidth="233.0" />
+                                    <Button layoutX="20.0" layoutY="16.0" mnemonicParsing="false" onAction="#Logout" text="Logout" />
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
